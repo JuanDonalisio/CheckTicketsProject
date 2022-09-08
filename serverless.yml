@@ -1,0 +1,58 @@
+service: checktickets
+
+frameworkVersion: '3'
+
+plugins:
+  - serverless-offline
+  - serverless-dynamodb-local
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+#  stage: dev
+
+	
+custom:
+  dynamodb:
+    stages:
+      - dev
+    start:
+      port: 8000
+      inMemory: true 
+
+iam:
+  role: 
+    statements:
+      - Effect: Allow
+        Action:
+          - "dynamodb:PutItem"
+          - "dynamodb:GetItem"
+          - "dynamodb:DeleteItem"
+          - "dynamodb:Scan"
+        Resource:
+          - { "FN::GetAtt": ["InformationTable","Arn"]}
+
+resources:
+  Resources:
+    MyDynamoDB:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: InformationTable
+        AttributeDefinitions:
+          - AttributeName: information
+            AttributeType: S
+        KeySchema:
+          - AttributeName: information
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - httpApi:
+          path: /hello
+          method: get
