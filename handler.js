@@ -1,25 +1,25 @@
-const {createTransaction} = require('./dynamo');
-const cheerio = require('cheerio');
-const axios = require('axios');
-
-
+const {getPageInformation} =  require('./helpers/InfoPage'); 
 
 exports.hello = async (event) => {
-  const test = axios.get('https://www.allaccess.com.ar/event/harry-styles-2022').then(urlResponse => {
-    const $ = cheerio.load(urlResponse.data);
-    //console.log($('div.event_info').text());
-    return $('div.event_info').text()
-    });
-    const tuki = await test;
-    await createTransaction(tuki)
-  return {
-    statusCode: 200,
-    body: JSON.stringify(
-      {
-        message:  "test"
-      },
-      null,
-      2
-    ),
-  };
+  const pageInformation = await getPageInformation();
+  if (pageInformation.includes("No hay vuelos disponibles")) {
+    return {
+      statusCode: 200,
+      body: JSON.stringify(
+        {
+          message: "Aun no hay vuelos",
+        },
+      ),
+    };
+  }
+  else{
+    return {
+      statusCode: 200,
+      body: JSON.stringify(
+        {
+          message: "Puede que haya algun vuelo",
+        },
+      ),
+    };
+  }
 };

@@ -4,50 +4,14 @@ frameworkVersion: '3'
 
 plugins:
   - serverless-offline
-  - serverless-dynamodb-local
 
 provider:
   name: aws
   runtime: nodejs12.x
+  environment:
+    ENDPOINT_FLYB: "https://flybondi.com/ar/search/results?adults=2&children=0&currency=ARS&departureDate=2022-10-27&fromCityCode=BUE&infants=0&toCityCode=COR"
 
 #  stage: dev
-
-	
-custom:
-  dynamodb:
-    stages:
-      - dev
-    start:
-      port: 8000
-      inMemory: true 
-
-iam:
-  role: 
-    statements:
-      - Effect: Allow
-        Action:
-          - "dynamodb:PutItem"
-          - "dynamodb:GetItem"
-          - "dynamodb:DeleteItem"
-          - "dynamodb:Scan"
-        Resource:
-          - { "FN::GetAtt": ["InformationTable","Arn"]}
-
-resources:
-  Resources:
-    MyDynamoDB:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: InformationTable
-        AttributeDefinitions:
-          - AttributeName: information
-            AttributeType: S
-        KeySchema:
-          - AttributeName: information
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
 
 functions:
   hello:

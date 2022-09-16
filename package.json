@@ -10,11 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.1204.0",
     "axios": "^0.27.2",
-    "cheerio": "^1.0.0-rc.12",
-    "request": "^2.88.2",
-    "serverless-dynamodb-local": "^0.2.40"
+    "cheerio": "^1.0.0-rc.12"
   },
   "devDependencies": {
     "serverless-offline": "^9.2.6"
