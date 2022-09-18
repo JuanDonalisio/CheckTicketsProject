@@ -2,8 +2,8 @@ const getPageInformation =  require('./helpers/InfoPage');
 
 exports.checkTickets = async (event) => {
   const pageInformation = await getPageInformation();
-  console.log(pageInformation);
   if (pageInformation.includes("No hay vuelos disponibles")) {
+    console.log("Aun no hay vuelos");
     return {
       statusCode: 200,
       body: JSON.stringify(
@@ -14,6 +14,7 @@ exports.checkTickets = async (event) => {
     };
   }
   else{
+    console.log("Puede que haya algun vuelo");
     return {
       statusCode: 200,
       body: JSON.stringify(
