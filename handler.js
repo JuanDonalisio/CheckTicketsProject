@@ -1,6 +1,6 @@
 const getPageInformation =  require('./helpers/InfoPage'); 
 
-exports.hello = async (event) => {
+exports.checkTickets = async (event) => {
   const pageInformation = await getPageInformation();
   console.log(pageInformation);
   if (pageInformation.includes("No hay vuelos disponibles")) {

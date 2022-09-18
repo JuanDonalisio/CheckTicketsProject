@@ -8,13 +8,14 @@ plugins:
 provider:
   name: aws
   runtime: nodejs12.x
+  region: us-west-1
 
 #  stage: dev
 
 functions:
-  hello:
-    handler: handler.hello
+  checkTickets:
+    handler: handler.checkTickets
     events:
       - httpApi:
-          path: /hello
+          path: /checkTickets
           method: get
