@@ -5,7 +5,7 @@ exports.checkTickets = async (event) => {
   if (pageInformation.includes("No hay vuelos disponibles")) {
     console.log("Aun no hay vuelos");
     return {
-      statusCode: 200,
+      statusCode: 404,
       body: JSON.stringify(
         {
           message: "Aun no hay vuelos",
