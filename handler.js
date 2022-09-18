@@ -2,6 +2,7 @@ const getPageInformation =  require('./helpers/InfoPage');
 
 exports.checkTickets = async (event) => {
   const pageInformation = await getPageInformation();
+  console.log("Puede que haya algun vuelo");
   if (pageInformation.includes("No hay vuelos disponibles")) {
     console.log("Aun no hay vuelos");
     return {
