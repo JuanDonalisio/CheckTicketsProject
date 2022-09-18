@@ -1,7 +1,8 @@
-const {getPageInformation} =  require('./helpers/InfoPage'); 
+const getPageInformation =  require('./helpers/InfoPage'); 
 
 exports.hello = async (event) => {
   const pageInformation = await getPageInformation();
+  console.log(pageInformation);
   if (pageInformation.includes("No hay vuelos disponibles")) {
     return {
       statusCode: 200,

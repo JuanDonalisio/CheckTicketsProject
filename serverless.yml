@@ -8,8 +8,6 @@ plugins:
 provider:
   name: aws
   runtime: nodejs12.x
-  environment:
-    ENDPOINT_FLYB: "https://flybondi.com/ar/search/results?adults=2&children=0&currency=ARS&departureDate=2022-10-27&fromCityCode=BUE&infants=0&toCityCode=COR"
 
 #  stage: dev
 
